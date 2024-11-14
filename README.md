@@ -1,3 +1,58 @@
+<details><summary><b>Giao thức UART</b></summary>
+<p>
+
+<details><summary><b>Khái niệm</b></summary>
+<p>
+
+UART (Universal Asynchronous Receiver-Transmitter – Bộ truyền nhận dữ liệu không đồng bộ) là một giao thức truyền thông phần cứng dùng giao tiếp nối tiếp không đồng bộ, bao gồm hai đường truyền dữ liệu độc lập là TX (truyền) và RX (nhận). Dữ liệu được truyền và nhận qua các đường truyền này dưới dạng các khung dữ liệu (data frame) có cấu trúc chuẩn, với một bit bắt đầu (start bit), một số bit dữ liệu (data bits), một bit kiểm tra chẵn lẻ (parity bit) và một hoặc nhiều bit dừng (stop bit).
+
+![image](https://github.com/user-attachments/assets/8bb2fc6f-d865-49ce-93af-cfc82c58ab02)
+
+</p>
+</details>
+
+<details><summary><b>Tốc độ truyền UART (Baud rate)</b></summary>
+<p>
+
+Thông thường, tốc độ truyền của UART được đặt ở một số chuẩn, chẳng hạn như 9600, 19200, 38400, 57600, 115200 baud và các tốc độ khác. Tốc độ truyền này định nghĩa số lượng bit được truyền qua mỗi giây. Các tốc độ truyền khác nhau thường được sử dụng tùy thuộc vào ứng dụng và hệ thống sử dụng.
+
+</p>
+</details>
+
+<details><summary><b>Các chế độ truyền dữ liệu</b></summary>
+<p>
+
+UART truyền dữ liệu nối tiếp, theo 1 trong 3 chế độ:
+
+- **Simplex**: Chỉ tiến hành giao tiếp một chiều
+- **Half duplex**: Dữ liệu sẽ đi theo một hướng tại 1 thời điểm
+- **Full duplex**: Thực hiện giao tiếp đồng thời đến và đi từ mỗi master và slave.
+
+</p>
+</details>
+
+<details><summary><b>Cách thức hoạt động</b></summary>
+<p>
+
+Chân Tx (truyền) của một chip sẽ kết nối trực tiếp với chân Rx (nhận) của chip khác và ngược lại. Quá trình truyền dữ liệu thường sẽ diễn ra ở 3.3V hoặc 5V.
+
+Khi tín hiệu gửi trên chân Tx (truyền), bộ giao tiếp Uart đầu tiên sẽ dịch thông tin song song này thành dạng nối tiếp và sau đó truyền tới thiết bị nhận. Chân Rx (nhận) của Uart thứ 2 sẽ biến đổi nó trở lại thành dạng song song để giao tiếp với các thiết bị điều khiển.
+
+Dữ liệu truyền qua Uart sẽ đóng thành các gói (packet). Mỗi gói dữ liệu chứa 1 bit bắt đầu, 5 – 9 bit dữ liệu (tùy thuộc vào bộ Uart), 1 bit chẵn lẻ tùy chọn và 1 bit hoặc 2 bit dừng.
+
+![image](https://github.com/user-attachments/assets/08a61cd1-45e6-4669-93e1-48fcced38435)
+ 
+Quá trình truyền dữ liệu Uart sẽ diễn ra dưới dạng các gói dữ liệu này, bắt đầu bằng 1 bit bắt đầu, đường mức cao được kéo dần xuống thấp. Sau bit bắt đầu là 5 – 9 bit dữ liệu truyền trong khung dữ liệu của gói, theo sau là bit chẵn lẻ tùy chọn để nhằm xác minh việc truyền dữ liệu thích hợp. Sau cùng, 1 hoặc nhiều bit dừng sẽ được truyền ở nơi đường đặt tại mức cao. Vậy là sẽ kết thúc việc truyền đi một gói dữ liệu
+
+
+</p>
+</details>
+
+</p>
+</details>
+
+<br>
+
 <details><summary><b>Giao thức SPI</b></summary>
 <p>
 
