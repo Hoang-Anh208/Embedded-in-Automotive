@@ -499,8 +499,76 @@ Quá trình này đảm bảo rằng không có dữ liệu bị mất trong qu�
 </p>
 </details>
 
-<details><summary><b></b></summary>
+<details><summary><b>Lỗi trong giao thức CAN</b></summary>
 <p>
+
+<details><summary><b>1. Các loại lỗi trong CAN</b></summary>
+<p>
+
+<details><summary><b>📚 Bit Error</b></summary>
+<p>
+
+Bit Error xảy ra khi một node gửi một bit (dominant hoặc recessive) lên bus và nhận lại một bit khác với giá trị mong đợi. Trong mạng CAN, mỗi node không chỉ gửi dữ liệu mà còn tự lắng nghe các tín hiệu trên bus để kiểm tra sự đồng bộ.
+●	Bit dominant (0): Tín hiệu ưu tiên trên bus.
+●	Bit recessive (1): Tín hiệu không ưu tiên trên bus.
+Nguyên nhân:
+●	Nếu một node gửi một bit recessive (1) nhưng nhận lại bit dominant (0) từ bus, node này sẽ phát hiện ra lỗi.
+●	Điều này có thể xảy ra khi một node khác có ưu tiên cao hơn trên bus đang truyền dữ liệu, hoặc do tín hiệu bị nhiễu.
+
+
+</p>
+</details>
+
+<details><summary><b>📚 </b></summary>
+<p>
+
+</p>
+</details>
+
+<details><summary><b>📚 </b></summary>
+<p>
+
+</p>
+</details>
+
+<details><summary><b>📚 </b></summary>
+<p>
+
+</p>
+</details>
+
+<details><summary><b>📚 </b></summary>
+<p>
+
+</p>
+</details>
+
+<details><summary><b>📚 </b></summary>
+<p>
+
+</p>
+</details>
+
+</p>
+</details>
+
+<details><summary><b>2. Cơ chế phát hiện lỗi trong mạng CAN</b></summary>
+<p>
+
+</p>
+</details>
+
+<details><summary><b>3. Cơ chế sửa lỗi tự động trong mạng CAN</b></summary>
+<p>
+
+</p>
+</details>
+
+<details><summary><b>4. Các trạng thái lỗi của node</b></summary>
+<p>
+
+</p>
+</details>
 
 </p>
 </details>
