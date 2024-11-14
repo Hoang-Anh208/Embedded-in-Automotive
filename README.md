@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/86944a24-6758-41b8-95a7-82e9ace3059c)<details><summary><b>Giao thức SPI</b></summary>
+<details><summary><b>Giao thức SPI</b></summary>
 <p>
 
 <details><summary><b>Lý thuyết</b></summary>
