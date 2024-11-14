@@ -509,36 +509,70 @@ Quá trình này đảm bảo rằng không có dữ liệu bị mất trong qu�
 <p>
 
 Bit Error xảy ra khi một node gửi một bit (dominant hoặc recessive) lên bus và nhận lại một bit khác với giá trị mong đợi. Trong mạng CAN, mỗi node không chỉ gửi dữ liệu mà còn tự lắng nghe các tín hiệu trên bus để kiểm tra sự đồng bộ.
-●	Bit dominant (0): Tín hiệu ưu tiên trên bus.
-●	Bit recessive (1): Tín hiệu không ưu tiên trên bus.
+
+- Bit dominant (0): Tín hiệu ưu tiên trên bus.
+- Bit recessive (1): Tín hiệu không ưu tiên trên bus.
+
 Nguyên nhân:
-●	Nếu một node gửi một bit recessive (1) nhưng nhận lại bit dominant (0) từ bus, node này sẽ phát hiện ra lỗi.
-●	Điều này có thể xảy ra khi một node khác có ưu tiên cao hơn trên bus đang truyền dữ liệu, hoặc do tín hiệu bị nhiễu.
+
+- Nếu một node gửi một bit recessive (1) nhưng nhận lại bit dominant (0) từ bus, node này sẽ phát hiện ra lỗi.
+- Điều này có thể xảy ra khi một node khác có ưu tiên cao hơn trên bus đang truyền dữ liệu, hoặc do tín hiệu bị nhiễu.
+
+</p>
+</details>
+
+<details><summary><b>📚 Stuff Error</b></summary>
+<p>
+
+Stuff Error xảy ra khi có hơn 5 bit liên tiếp cùng giá trị (tất cả đều là 0 hoặc tất cả đều là 1) trên bus CAN. Điều này vi phạm quy tắc bit stuffing của giao thức CAN.
+
+**Quy tắc bit stuffing**: Trong mạng CAN, sau mỗi chuỗi 5 bit giống nhau liên tiếp, một bit ngược giá trị (ngược với giá trị của các bit trước đó) phải được thêm vào để đảm bảo tính đồng bộ và tránh nhiễu tín hiệu. Nếu quy tắc này bị vi phạm, lỗi sẽ xảy ra.
+
+Nguyên nhân: Vi phạm quy tắc bit stuffing có thể do lỗi trong quá trình truyền tín hiệu hoặc do thiết bị không tuân theo quy chuẩn CAN.
+
+</p>
+</details>
+
+<details><summary><b>📚 CRC Error</b></summary>
+<p>
+
+CRC Error xảy ra khi có sai lệch trong quá trình kiểm tra CRC (Cyclic Redundancy Check), được sử dụng để phát hiện lỗi trong dữ liệu truyền qua bus.
+
+Cơ chế CRC:
+
+- Trong mỗi khung dữ liệu CAN, có một CRC Field được sử dụng để kiểm tra tính toàn vẹn của dữ liệu. Trường này chứa giá trị CRC, được tính toán dựa trên nội dung của thông điệp.
+- Node nhận sẽ tính toán lại giá trị CRC của dữ liệu nhận được và so sánh với CRC trong trường CRC Field. Nếu hai giá trị này không khớp, một CRC error sẽ được phát hiện.
+
+Nguyên nhân: Lỗi CRC có thể xảy ra do nhiễu tín hiệu trong quá trình truyền dữ liệu hoặc do lỗi phần cứng trong node gửi hoặc nhận.
 
 
 </p>
 </details>
 
-<details><summary><b>📚 </b></summary>
+<details><summary><b>📚 Form Error</b></summary>
 <p>
+
+Form Error xảy ra khi cấu trúc khung dữ liệu không tuân theo quy chuẩn của giao thức CAN. Mỗi khung dữ liệu trong CAN phải tuân theo một cấu trúc định sẵn, bao gồm Start of Frame (SOF), Arbitration Field, Control Field, Data Field, CRC Field, ACK Field, và End of Frame (EOF).
+
+Nguyên nhân: Nếu một node nhận thấy có lỗi trong định dạng của bất kỳ trường nào trong khung dữ liệu, đặc biệt là các bit trong EOF hoặc ACK Field, nó sẽ phát hiện Form Error.
 
 </p>
 </details>
 
-<details><summary><b>📚 </b></summary>
+<details><summary><b>📚 Acknowledgment Error</b></summary>
 <p>
 
-</p>
-</details>
+Acknowledgment Error (ACK Error) xảy ra khi node gửi thông điệp lên bus mà không nhận được bit ACK từ bất kỳ node nào trên mạng.
 
-<details><summary><b>📚 </b></summary>
-<p>
+Cơ chế ACK trong CAN:
 
-</p>
-</details>
+- Khi một node gửi thành công một khung dữ liệu, các node nhận phải gửi một bit ACK dominant (0) để xác nhận rằng dữ liệu đã được nhận chính xác.
+- Nếu không có node nào gửi bit ACK, node gửi sẽ phát hiện ACK Error và phải truyền lại thông điệp.
 
-<details><summary><b>📚 </b></summary>
-<p>
+Nguyên nhân:
+
+- Thiết bị nhận có thể không hoạt động đúng cách hoặc không kết nối đúng vào bus CAN.
+- Tín hiệu ACK có thể bị nhiễu hoặc lỗi phần cứng.
 
 </p>
 </details>
@@ -555,11 +589,26 @@ Nguyên nhân:
 <details><summary><b>2. Cơ chế phát hiện lỗi trong mạng CAN</b></summary>
 <p>
 
+Mạng CAN sử dụng nhiều cơ chế để phát hiện lỗi, giúp duy trì tính ổn định và tin cậy của dữ liệu truyền tải trên bus. Các cơ chế này bao gồm:
+
+- **Kiểm tra bit**: Mỗi node gửi sẽ tự lắng nghe dữ liệu mà nó vừa gửi để đảm bảo rằng dữ liệu đó đã được truyền đúng cách. Nếu có sự khác biệt giữa bit gửi đi và bit nhận lại, node sẽ phát hiện bit error.
+- **Kiểm tra CRC**: Mỗi thông điệp CAN chứa một giá trị CRC được tính toán dựa trên dữ liệu. Node nhận sẽ tính toán lại giá trị CRC và so sánh với CRC của thông điệp để phát hiện lỗi.
+- **Kiểm tra định dạng (Form Check)**: Các bit trong EOF và ACK Field phải tuân theo một định dạng chuẩn. Nếu không, node nhận sẽ phát hiện form error.
+- **Xác nhận (Acknowledgment)**: Node gửi sẽ kiểm tra xem có bất kỳ node nào trên bus gửi bit ACK để xác nhận rằng dữ liệu đã được nhận thành công. Nếu không, ACK error sẽ được phát hiện.
+
+
 </p>
 </details>
 
 <details><summary><b>3. Cơ chế sửa lỗi tự động trong mạng CAN</b></summary>
 <p>
+
+Khi lỗi được phát hiện, mạng CAN có khả năng sửa lỗi một cách tự động thông qua quá trình phát Error Frame và truyền lại thông điệp.
+
+Cơ chế sửa lỗi trong CAN:
+
+- **Error Frame**: Khi một node phát hiện lỗi (bit error, CRC error, form error, stuff error, hoặc ACK error), nó sẽ gửi một Error Frame để thông báo cho tất cả các node khác trên bus rằng có lỗi đã xảy ra.
+- **Truyền lại thông điệp**: Sau khi Error Frame được phát, các node sẽ dừng giao tiếp và node gửi ban đầu sẽ cố gắng truyền lại thông điệp bị lỗi. Việc này sẽ tiếp tục cho đến khi thông điệp được truyền đi thành công hoặc node gửi bị đưa vào trạng thái bus off nếu lỗi quá nhiều.
 
 </p>
 </details>
@@ -567,20 +616,78 @@ Nguyên nhân:
 <details><summary><b>4. Các trạng thái lỗi của node</b></summary>
 <p>
 
-</p>
-</details>
+Khi phát hiện lỗi, các node trong mạng CAN sẽ tự động chuyển đổi giữa ba trạng thái lỗi để đảm bảo hệ thống hoạt động ổn định và không gây gián đoạn cho bus.
 
-</p>
-</details>
-
-<details><summary><b></b></summary>
+<details><summary><b>📚 Error Active</b></summary>
 <p>
 
+Trong trạng thái Error Active, node vẫn có khả năng tham gia đầy đủ vào quá trình truyền thông và có thể phát hiện lỗi. Nếu node phát hiện lỗi, nó sẽ gửi một Error Frame để thông báo cho các node khác trên bus rằng đã xảy ra lỗi.
+
 </p>
 </details>
 
-<details><summary><b></b></summary>
+<details><summary><b>📚 Error Passive</b></summary>
 <p>
+    
+Nếu một node phát hiện quá nhiều lỗi, nó sẽ chuyển sang trạng thái Error Passive. Trong trạng thái này, node vẫn có thể tham gia truyền thông, nhưng nếu phát hiện lỗi, nó sẽ không gửi Error Frame mạnh mẽ như trong trạng thái Error Active. Điều này giúp tránh gây gián đoạn lớn cho bus khi node gặp sự cố thường xuyên.
+
+Trong trạng thái Error Passive, node vẫn có thể nhận và gửi thông điệp nhưng sẽ hạn chế việc can thiệp vào quá trình truyền thông của các node khác. Node chỉ gửi Error Frame yếu hơn để thông báo lỗi, và không ảnh hưởng đến quá trình truyền thông của các node khác.
+
+
+</p>
+</details>
+
+<details><summary><b>📚 Bus Off</b></summary>
+<p>
+
+Khi một node gặp quá nhiều lỗi nghiêm trọng, nó sẽ chuyển sang trạng thái Bus Off. Trong trạng thái này, node sẽ hoàn toàn ngắt kết nối khỏi bus CAN và không thể tham gia vào quá trình truyền hay nhận dữ liệu. Node chỉ có thể được kết nối lại vào bus sau khi được khởi động lại (restart) hoặc reset bởi phần mềm.
+
+Bus Off là trạng thái an toàn, ngăn chặn một node bị lỗi nặng gây ra sự cố nghiêm trọng cho toàn bộ hệ thống CAN.
+
+</p>
+</details>
+
+</p>
+</details>
+
+</p>
+</details>
+
+<details><summary><b>Tốc độ truyền và giới hạn vật lý của CAN</b></summary>
+<p>
+
+<details><summary><b>📚 Tốc độ baud của CAN</b></summary>
+<p>
+
+Tốc độ baud là tốc độ truyền dữ liệu trên bus CAN, thường được đo bằng kbps (kilobits per second) hoặc Mbps (megabits per second). Tốc độ baud quyết định tốc độ truyền thông giữa các thiết bị trên mạng và phụ thuộc vào khả năng xử lý của hệ thống cũng như chiều dài của bus.
+
+**Dải tốc độ baud của CAN**: 
+
+Mạng CAN hỗ trợ dải tốc độ baud từ 10 kbps đến 1 Mbps.
+
+- 10 kbps: Tốc độ thấp nhất, thường được sử dụng cho các hệ thống có yêu cầu truyền thông chậm, nhưng cần truyền xa.
+- 1 Mbps: Tốc độ cao nhất, thường được sử dụng trong các ứng dụng yêu cầu truyền thông nhanh, chẳng hạn như trong hệ thống ô tô hoặc robot.
+
+**Ảnh hưởng của tốc độ baud**:
+
+- **Chiều dài tối đa của bus**: Tốc độ truyền càng cao, chiều dài tối đa của bus càng ngắn do ảnh hưởng của thời gian lan truyền tín hiệu trên bus. Điều này có nghĩa là khi cần truyền dữ liệu với tốc độ cao, hệ thống phải chấp nhận giảm chiều dài của bus để đảm bảo tín hiệu truyền chính xác và đồng bộ.
+- **Độ trễ**: Tốc độ baud càng cao, độ trễ của việc truyền thông tin trên mạng càng giảm, giúp cải thiện khả năng đáp ứng của hệ thống.
+
+
+</p>
+</details>
+
+<details><summary><b>📚 Chiều dài tối đa của bus trong CAN</b></summary>
+<p>
+
+Chiều dài của bus trong mạng CAN bị giới hạn bởi tốc độ baud và chất lượng của dây dẫn (bus). Sự kết hợp giữa tốc độ truyền và chiều dài của bus quyết định khả năng truyền tín hiệu đúng cách và độ tin cậy của mạng.
+
+**Tốc độ truyền càng cao, chiều dài bus càng ngắn**: Điều này do thời gian lan truyền tín hiệu trên dây dẫn cần phải nhỏ hơn một khoảng thời gian nhất định để đảm bảo tất cả các node trên bus có thể nhận được tín hiệu đồng bộ.
+
+Khi tốc độ baud tăng lên, thời gian bit ngắn lại, nghĩa là tín hiệu phải đến các node nhận nhanh hơn. Do đó, chiều dài tối đa của bus phải giảm để đảm bảo thời gian lan truyền tín hiệu phù hợp với tốc độ baud.
+
+</p>
+</details>
 
 </p>
 </details>
