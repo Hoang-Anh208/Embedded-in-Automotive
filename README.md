@@ -1,3 +1,82 @@
+<details><summary><b>Bộ nhớ Flash & Bootloader/b></summary>
+<p>
+
+<details><summary><b>Các loại bộ nhớ</b></summary>
+<p>
+
+<details><summary><b>📚 RAM</b></summary>
+<p>
+
+RAM (Random Access Memory)** **là bộ nhớ **tạm thời** dùng để lưu dữ liệu trong quá trình chương trình chạy. Khi tắt nguồn, dữ liệu trong RAM sẽ mất.
+
+**Ví dụ**: Khi vi điều khiển cần lưu các giá trị đang tính toán hoặc các biến dùng tạm, nó sẽ dùng RAM. Khi bạn tắt thiết bị, dữ liệu này sẽ bị xóa.
+
+</p>
+</details>
+
+<details><summary><b>📚 Flash</b></summary>
+<p>
+
+**Flash** là bộ nhớ dùng để **lưu trữ chương trình** mà vi điều khiển sẽ chạy. Nó giống như ổ cứng của máy tính – dữ liệu vẫn còn đó ngay cả khi bạn tắt thiết bị. 
+
+**Ví dụ**: Nếu bạn nạp chương trình vào vi điều khiển, chương trình sẽ nằm trong Flash để khi bật nguồn lại, nó có thể chạy tiếp.
+
+</p>
+</details>
+
+<details><summary><b>📚 EEPROM</b></summary>
+<p>
+
+EEPROM (Electrically Erasable Programmable Read-Only Memory) là bộ nhớ có thể **lưu dữ liệu cần giữ lại** sau khi tắt thiết bị, nhưng dễ xóa và ghi lại. Nó rất thích hợp để lưu các cài đặt cần giữ lâu dài, nhưng không cần thay đổi thường xuyên.
+
+**Ví dụ**: Nếu bạn có một cài đặt cần lưu (như độ sáng của màn hình), bạn có thể lưu nó vào EEPROM để khi bật lại, thiết bị nhớ được cài đặt của bạn.
+
+</p>
+</details>
+
+<details><summary><b>📚 So sánh</b></summary>
+<p>
+
+## Giống nhau
+
+- Flash và EEPROM đều là bộ nhớ không khả biến, giữ lại dữ liệu khi mất nguồn.
+- Cả ba loại đều có vai trò quan trọng trong vi điều khiển, hỗ trợ các tác vụ khác nhau từ lưu chương trình, xử lý dữ liệu tạm thời đến lưu trữ các cài đặt hệ thống.
+
+## Khác nhau
+
+|                | **Flash**                                                                                      | **RAM**                                                                                | **EEPROM**                                                                                          |
+|----------------------------|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| **Khả biến (Volatile)**    | Không khả biến – dữ liệu vẫn còn khi mất nguồn                                                  | Khả biến – dữ liệu sẽ mất khi mất nguồn                                                 | Không khả biến – dữ liệu vẫn còn khi mất nguồn                                                      |
+| **Chức năng chính**        | Lưu trữ chương trình (firmware)                                                                | Lưu trữ dữ liệu tạm thời, biến cục bộ trong quá trình chương trình chạy                 | Lưu trữ dữ liệu cần giữ lại khi tắt nguồn như cài đặt hoặc cấu hình                                 |
+| **Tốc độ truy cập**        | Nhanh nhưng chậm hơn RAM                                                                       | Nhanh nhất                                                                              | Chậm hơn cả Flash và RAM                                                                            |
+| **Khả năng ghi/xóa**       | Có giới hạn số lần ghi/xóa (thường vài ngàn đến vài chục ngàn lần)                             | Không có giới hạn, vì không ghi nhớ lâu dài                                             | Có giới hạn số lần ghi/xóa cao hơn Flash (thường từ 100,000 đến 1 triệu lần)                        |
+| **Kích thước bộ nhớ**      | Thường lớn nhất trong vi điều khiển để chứa toàn bộ chương trình                               | Nhỏ hơn Flash, dùng để lưu trữ dữ liệu đang xử lý                                      | Thường rất nhỏ, chỉ đủ lưu một số cấu hình cần thiết                                                 |
+| **Khả năng lưu trữ**       | Lưu được dữ liệu ngay cả khi tắt nguồn                                                         | Dữ liệu sẽ mất khi tắt nguồn                                                            | Lưu được dữ liệu ngay cả khi tắt nguồn                                                              |
+| **Ứng dụng điển hình**     | Lưu trữ firmware (chương trình điều khiển)                                                     | Lưu trữ các biến tạm thời và dữ liệu trong quá trình thực thi                           | Lưu trữ các cài đặt cấu hình, dữ liệu cần giữ lại khi mất nguồn (ví dụ: cấu hình hệ thống, hiệu chuẩn) |
+
+</p>
+</details>
+
+</p>
+</details>
+
+<details><summary><b></b></summary>
+<p>
+
+</p>
+</details>
+
+<details><summary><b></b></summary>
+<p>
+
+</p>
+</details>
+
+</p>
+</details>
+
+<br>
+
 <details><summary><b>Giao thức UART</b></summary>
 <p>
 
