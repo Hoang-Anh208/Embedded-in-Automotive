@@ -215,7 +215,7 @@ Bootloader là chương trình chạy đầu tiên khi khởi động, thường
 - Bootloader do nhà sản xuất cung cấp.
 - Bootloader do người dùng tự viết
 
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/75c667e9-8487-4967-aef2-29b76beb60cb)
 
 
 </p>
