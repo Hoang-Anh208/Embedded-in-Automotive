@@ -1,4 +1,4 @@
-<details><summary><b>Bộ nhớ Flash & Bootloader/b></summary>
+<details><summary><b>Bộ nhớ Flash & Bootloader</b></summary>
 <p>
 
 <details><summary><b>Các loại bộ nhớ</b></summary>
