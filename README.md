@@ -71,9 +71,22 @@ EEPROM (Electrically Erasable Programmable Read-Only Memory) là bộ nhớ có 
 - FLASH có giới hạn số lần xóa/ghi.
 - Trước khi dữ liệu mới vào FLASH thì xóa FLASH trước. 
 
+<br>
+
+<details><summary><b>📚 Phân vùng bộ nhớ Flash</b></summary>
+<p>
+
 ![image](https://github.com/user-attachments/assets/f0074bf9-0111-49f6-94cb-ad04cdda538a)
 
-<br>
+
+- **Code Memory (Main Memory)**: Dùng để lưu chương trình.
+- **System Memory**: Từ địa chỉ cố định, thường chứa bootloader của ST.
+- **Option Bytes**: Lưu trữ cấu hình bảo mật và các tham số khởi động.
+
+Bộ nhớ Flash chính bắt đầu từ địa chỉ 0x08000000 và kết thúc tại địa chỉ 0x0801FFFF.
+
+</p>
+</details>
 
 <details><summary><b>📚 Xóa Flash</b></summary>
 <p>
