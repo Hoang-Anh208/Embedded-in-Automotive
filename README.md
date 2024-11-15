@@ -109,6 +109,8 @@ Sơ đồ ghi FLash như hình:
 
 ![image](https://github.com/user-attachments/assets/63fa1e9e-63d2-46b9-bf9f-c653a66d9aa3)
 
+<br>
+
 </p>
 </details>
 
@@ -173,7 +175,7 @@ void Flash_WriteNumByte(uint32_t address, uint8_t *data, int num)
 	 while(FLASH_GetFlagStatus(FLASH_FLAG_BSY) == 1);
 	 uint16_t *ptr = (uint16_t*)data;
 	 for(int i=0; i<((num+1)/2); i++)
-  {
+  	 {
 		  FLASH_ProgramHalfWord(address+2*i, *ptr);
 		  while(FLASH_GetFlagStatus(FLASH_FLAG_BSY) == 1);
 		  ptr++;
