@@ -205,8 +205,18 @@ void Flash_WriteNumByte(uint32_t address, uint8_t *data, int num)
 </p>
 </details>
 
-<details><summary><b></b></summary>
+<details><summary><b>Bootloader</b></summary>
 <p>
+
+Bootloader là một ứng dụng có mục tiêu chính là nâng cấp hoặc sửa đổi phần mềm hệ thống mà không cần sự can thiệp của các công cụ nâng cấp chương trình cơ sở chuyên dụng. Bootloader có thể có nhiều chức năng, nhưng nó chủ yếu được sử dụng để quản lý ứng dụng. Nó cũng có thể sử dụng các giao thức khác nhau như UART, CAN, I2C, I2S, Ethernet hoặc USB để thiết lập giao tiếp và bắt đầu nâng cấp firmware.
+
+Bootloader là chương trình chạy đầu tiên khi khởi động, thường gồm 2 loại:
+
+- Bootloader do nhà sản xuất cung cấp.
+- Bootloader do người dùng tự viết
+
+![Uploading image.png…]()
+
 
 </p>
 </details>
