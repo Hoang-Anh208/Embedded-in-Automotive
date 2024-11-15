@@ -217,6 +217,37 @@ Bootloader là chương trình chạy đầu tiên khi khởi động, thường
 
 ![image](https://github.com/user-attachments/assets/75c667e9-8487-4967-aef2-29b76beb60cb)
 
+<br>
+
+Quá trình từ lúc cấp nguồn hoặc reset cho đến khi chạy hàm main():
+
+## Khi không có Bootloader:
+
+1. Đầu tiên, MCU đọc giá trị BOOT0 và BOOT1 để quyết định bắt đầu đọc dữ liệu tại nơi nào của bộ nhớ.
+
+2. Địa chỉ bắt đầu của vùng nhớ đó sẽ được lưu vào thanh ghi PC (Program Counter) để tiến hành đọc lệnh từ đó.
+
+3. Lấy giá trị của ô nhớ đầu tiên để khởi tạo MSP (Main Stack Pointer).
+
+4. Thanh ghi PC chạy đến ô nhớ tiếp theo, ô nhớ này chứa địa chỉ của Reset_Handler.
+
+5. Chương trình sẽ nhảy đến Reset_Handler để thực thi và làm các nhiệm vụ:
+
+- Khởi tạo hệ thống
+- Sao chép các dữ liệu (biến) từ Flash qua RAM
+- Gọi hàm main()
+
+![image](https://github.com/user-attachments/assets/791cde51-0b38-4181-ba3f-0056f53dda83)
+
+<br>
+
+## Khi có Bootloader
+
+1. Sau khi Reset thì vi điều khiển nhảy đến Reset_Handler() mặc định ở địa chỉ 0x08000000 và nhảy đến hàm main() của chương trình Boot.
+2. Chương trình Boot này nó sẽ lấy địa chỉ của chương trình ứng dụng muốn nhảy đến.
+3. Gọi hàm Bootloader(), hàm này sẽ set thanh ghi SCB_VTOR theo địa chỉ App muốn nhảy đến, SCB➔VTOR = Firmware address.
+4. Sau đó gọi hàm Reset mềm (nhảy đến Reset_Handler()).
+5. Bây giờ Firmware mới bắt đầu chạy và Vi xử lý đã nhận diện Reset_Handler() ở địa chỉ mới nên dù có nhấn nút Reset thì nó vẫn chạy trong Application.
 
 </p>
 </details>
