@@ -244,10 +244,46 @@ Quá trình từ lúc cấp nguồn hoặc reset cho đến khi chạy hàm main
 ## Khi có Bootloader
 
 1. Sau khi Reset thì vi điều khiển nhảy đến Reset_Handler() mặc định ở địa chỉ 0x08000000 và nhảy đến hàm main() của chương trình Boot.
+
 2. Chương trình Boot này nó sẽ lấy địa chỉ của chương trình ứng dụng muốn nhảy đến.
+
 3. Gọi hàm Bootloader(), hàm này sẽ set thanh ghi SCB_VTOR theo địa chỉ App muốn nhảy đến, SCB➔VTOR = Firmware address.
+
 4. Sau đó gọi hàm Reset mềm (nhảy đến Reset_Handler()).
+
 5. Bây giờ Firmware mới bắt đầu chạy và Vi xử lý đã nhận diện Reset_Handler() ở địa chỉ mới nên dù có nhấn nút Reset thì nó vẫn chạy trong Application.
+
+![image](https://github.com/user-attachments/assets/7de81f66-9a86-4d8b-935b-9dac4907e8e9)
+
+<br>
+
+```cpp
+#define ADDR_STR_BLINK	0x08008000
+
+void Boot(void)
+{
+	// Thiết lập lại hệ thống clock
+	RCC_DeInit();
+
+	// Vô hiệu hóa các lỗi ngắt để tránh lỗi trong quá trình chuyển giao
+	SCB->SHCSR &= ~(SCB_SHCSR_USGFAULTENA_Msk | SCB_SHCSR_BUSFAULTENA_Msk | SCB_SHCSR_MEMFAULTENA_Msk);
+
+	// Cập nhật Stack Pointer từ bảng vector ngắt của chương trình chính
+	__set_MSP(*(__IO uint32_t*) (ADDR_STR_BLINK));
+
+	// Cập nhật thanh ghi SCB->VTOR để trỏ đến bảng vector ngắt của chương trình chính
+	SCB->VTOR = ADDR_STR_BLINK;
+
+	// Lấy địa chỉ Reset Handler của chương trình chính	
+	uint32_t jumpAddress = *(__IO uint32_t*) (ADDR_STR_BLINK + 4);
+	
+	// Tạo con trỏ hàm đến Reset Handler
+	void (*reset_handler)(void) = (void (*) (void)) jumpAddress;
+
+	Nhảy vào Reset Handler của chương trình chính
+	reset_handler();
+}
+```
 
 </p>
 </details>
