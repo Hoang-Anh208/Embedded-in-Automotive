@@ -49,18 +49,20 @@ EEPROM (Electrically Erasable Programmable Read-Only Memory) là bộ nhớ có 
 | **Khả biến (Volatile)**    | Không khả biến – dữ liệu vẫn còn khi mất nguồn                                                  | Khả biến – dữ liệu sẽ mất khi mất nguồn                                                 | Không khả biến – dữ liệu vẫn còn khi mất nguồn                                                      |
 | **Chức năng chính**        | Lưu trữ chương trình (firmware)                                                                | Lưu trữ dữ liệu tạm thời, biến cục bộ trong quá trình chương trình chạy                 | Lưu trữ dữ liệu cần giữ lại khi tắt nguồn như cài đặt hoặc cấu hình                                 |
 | **Tốc độ truy cập**        | Nhanh nhưng chậm hơn RAM                                                                       | Nhanh nhất                                                                              | Chậm hơn cả Flash và RAM                                                                            |
-| **Khả năng ghi/xóa**       | Có giới hạn số lần ghi/xóa (thường vài ngàn đến vài chục ngàn lần)                             | Không có giới hạn, vì không ghi nhớ lâu dài                                             | Có giới hạn số lần ghi/xóa cao hơn Flash (thường từ 100,000 đến 1 triệu lần)                        |
+| **Khả năng ghi/xóa**       | Có giới hạn số lần ghi/xóa (thường vài ngàn đến vài chục ngàn lần), chỉ có thể đọc hoặc ghi theo khối 2/4 byte                             | Không có giới hạn, vì không ghi nhớ lâu dài                                             | Có giới hạn số lần ghi/xóa cao hơn Flash (thường từ 100,000 đến 1 triệu lần), tương tự FLASH, tuy nhiên có thể đọc/ghi theo từng byte.                       |
 | **Kích thước bộ nhớ**      | Thường lớn nhất trong vi điều khiển để chứa toàn bộ chương trình                               | Nhỏ hơn Flash, dùng để lưu trữ dữ liệu đang xử lý                                      | Thường rất nhỏ, chỉ đủ lưu một số cấu hình cần thiết                                                 |
 | **Khả năng lưu trữ**       | Lưu được dữ liệu ngay cả khi tắt nguồn                                                         | Dữ liệu sẽ mất khi tắt nguồn                                                            | Lưu được dữ liệu ngay cả khi tắt nguồn                                                              |
 | **Ứng dụng điển hình**     | Lưu trữ firmware (chương trình điều khiển)                                                     | Lưu trữ các biến tạm thời và dữ liệu trong quá trình thực thi                           | Lưu trữ các cài đặt cấu hình, dữ liệu cần giữ lại khi mất nguồn (ví dụ: cấu hình hệ thống, hiệu chuẩn) |
 
-</p>
-</details>
+<br>
 
 </p>
 </details>
 
-<details><summary><b></b></summary>
+</p>
+</details>
+
+<details><summary><b>Bộ nhớ Flash trên STM32F1</b></summary>
 <p>
 
 </p>
